@@ -1,0 +1,6 @@
+update_database.py
+*.pyc
+recommender/*.pyc
+.*
+!.gitignore
+recommender/__pycache__

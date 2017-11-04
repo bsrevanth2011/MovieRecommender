@@ -132,6 +132,9 @@ u.user     -- Demographic information about the users; this is a tab
               user id | age | gender | occupation | zip code
               The user ids are the ones used in the u.data data set.
 
+u.details  -- Movie details collected from themoviedb.org.
+              adult | title | overview | popularity | poster_path | genre_ids
+
 u.occupation -- A list of the occupations.
 
 u1.base    -- The data sets u1.base and u1.test through u5.base and u5.test
