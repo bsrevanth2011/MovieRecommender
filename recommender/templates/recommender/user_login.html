@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'recommender/styles/form.css' %}">
+</head>
+<body>
+    <div class="fluid-container">
+        <div class="form-container col-sm-offset-4 col-sm-4">
+            <div class="form-register col-sm-12"><h3>Login</h3></div>
+            <form action="" method="post">
+                {% csrf_token %}
+                    {%  include 'recommender/form_template.html' %}
+            <div class="form-submit col-sm-offset-4">
+                <button type="submit" class="btn btn-success">Login</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

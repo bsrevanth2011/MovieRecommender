@@ -1,0 +1,16 @@
+body{
+    background: url("../images/wallpaper.jpg");
+    font-family: "Courier New";
+}
+
+.movie_gist{
+    background-color: whitesmoke;
+    padding: 10px;
+    border-radius: 3px;
+    margin: 10px;
+    height: 400px;
+}
+
+.related-movies{
+}
+

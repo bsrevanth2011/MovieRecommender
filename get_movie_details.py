@@ -50,7 +50,7 @@ def download_posters(filepath='ml-100k/u.details'):
     response = requests.get("http://api.themoviedb.org/3/configuration", params=payload, headers=headers)
     response = json.loads(response.text)
     base_url = response['images']['base_url'] + 'w185'
-    poster_paths = poster_paths[1260:]
+    poster_paths = poster_paths[:200]
     for index, poster_path in enumerate(poster_paths):
         if index % 100 == 99:
             time.sleep(100)

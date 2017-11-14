@@ -1,0 +1,53 @@
+{%  extends 'recommender/base.html' %}
+{% block body %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'recommender/styles/movie_details.css' %}">
+    <div class="movie_details col-sm-12">
+        <div class="col-sm-2 movie_gist">
+            <div class="thumbnail">
+                <a href="{% url 'recommender:movie_detail' movie.id %}"><img src="{% static "recommender/images"%}{{ movie.poster_path }}"></a>
+            </div>
+            <div class="caption">
+                <h4><b>{{ movie.title }}</b></h4>
+                <h6>{{ movie.release_date }}</h6>
+            </div>
+        </div>
+        <div class="movie_description col-sm-9">
+            <div class="movie_row col-sm-12">
+                <div class="movie_label col-sm-2"><b>Title</b></div>
+                <div class="col-sm-10">{{ movie.title }}</div>
+            </div>
+            <div class="movie_row col-sm-12">
+                <div class="movie_label col-sm-2"><b>Overview</b></div>
+                <div class="overview_value col-sm-10">{{ movie.overview }}</div>
+            </div>
+            <div class="genre_row movie_row col-sm-12">
+                <div class="movie_label col-sm-2"><b>Genre</b></div>
+                <div class="col-sm-10">
+                    {% if not genres %}
+                        <div class="genre">Unknown</div>
+                    {% endif %}
+                    {% for genre in genres %}
+                        <div class="genre">{{ genre.genre }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-12 recommendation">
+    <div class="fluid-container related-movies"><h3>&nbsp;Related Movies</h3><hr></div>
+    {% for movie in recommended_movies %}
+        <div class="col-sm-2 movie_gist">
+            <div class="thumbnail">
+                <a href="{% url 'recommender:movie_detail' movie.id %}"><img src="{% static "recommender/images"%}{{ movie.poster_path }}"></a>
+            </div>
+            <div class="caption">
+                <h4><b>{{ movie.title }}</b></h4>
+                <h6>{{ movie.release_date }}</h6>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{%  endblock %}

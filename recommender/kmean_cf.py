@@ -78,6 +78,7 @@ def kmeans(ratings, k = 10):
 
 
 def similarity(ratings):
+    ratings += 1e-9
     user_sim = ratings.dot(ratings.T)
     norm = np.array(np.sqrt(np.diagonal(user_sim)))
     user_sim = user_sim / norm / norm.T
@@ -85,6 +86,7 @@ def similarity(ratings):
 
 
 def item_similarity(ratings):
+    ratings += 1e-9
     item_sim = ratings.T.dot(ratings)
     norm = np.array([np.sqrt(np.diagonal(item_sim))])
     item_sim = item_sim / norm / norm.T
@@ -97,8 +99,12 @@ def predict_rating_user(ratings, similarity):
     return similarity.dot(ratings) / np.array([np.abs(similarity).sum(axis=1)]).T
 
 
-def predict_rating_item(ratings, item_sim):
-    return ratings.dot(item_sim) / np.array([np.abs(item_sim).sum(axis=1)])
+def predict_rating_item(ratings, similarity):
+    item_bias = ratings.mean(axis=0)
+    ratings = (ratings - item_bias[np.newaxis, :]).copy()
+    pred = ratings.dot(similarity) / np.array([np.abs(similarity).sum(axis=1)])
+    pred += item_bias[np.newaxis, :]
+    return pred
 
 
 # In[60]:

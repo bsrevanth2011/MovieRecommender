@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 from django.db import models
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 
@@ -14,25 +14,33 @@ class Movie(models.Model):
     poster_path = models.TextField(max_length=50, null=True, blank=True)
     release_date = models.DateField(null=True, blank=True)
     genre_ids = models.TextField(max_length=100, null=True, blank=True)
+    average_rating = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
 
 
-class User(models.Model):
+class UserInfo(models.Model):
     id = models.IntegerField(primary_key=True)
-    age = models.IntegerField(null=True, blank=True)
-    gender = models.CharField(max_length=1, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.id)
+        return self.user.username
 
 
 class Rating(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserInfo, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     rating = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
         return str(self.rating)
+
+
+class Genre(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    genre = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.genre
 

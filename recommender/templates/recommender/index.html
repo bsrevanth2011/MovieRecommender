@@ -1,0 +1,18 @@
+{%  extends 'recommender/base.html' %}
+{% block body %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'recommender/styles/index.css' %}">
+    <div class="col-sm-12 all-movies">
+    {% for movie in movies %}
+        <div class="col-sm-2 movie_gist">
+            <div class="thumbnail">
+                <a href="{% url 'recommender:movie_detail' movie.id %}"><img src="{% static "recommender/images"%}{{ movie.poster_path }}"></a>
+            </div>
+            <div class="caption">
+                <b>{{ movie.title }}</b>
+                <h6>{{ movie.release_date }}</h6>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
