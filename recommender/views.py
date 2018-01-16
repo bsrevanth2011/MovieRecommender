@@ -31,11 +31,11 @@ def user(request):
     sim = similarity(ratings)
 
     pred = predict_rating_user(ratings, sim)
-    indices = np.argsort(pred[user.id - 1, :])[:-6:-1] + 1
+    indices = np.argsort(pred[user.id - 1, :])[:-11:-1] + 1
 
     recommended_movies = [Movie.objects.get(id=i) for i in indices]
-    popular_movies = Movie.objects.order_by('-popularity')[:5]
-    latest_movies = Movie.objects.order_by('-release_date')[:5]
+    popular_movies = Movie.objects.order_by('-popularity')[:10]
+    latest_movies = Movie.objects.order_by('-release_date')[:10]
     context = {
         'recommended_movies': recommended_movies,
         'popular_movies': popular_movies,
@@ -77,8 +77,8 @@ def user_movie_details(request, movie_id):
     count = np.sum(item_sim == 1)
     np.place(item_sim, item_sim == 1, np.zeros(count))
 
-    indices = np.argsort(item_sim[int(movie_id) - 1, :])[:-6:-1] + 1
-    recommended_movies = [Movie.objects.get(id=i) for i in indices]
+    indices = np.argsort(item_sim[int(movie_id) - 1, :])[:-12:-1] + 1
+    recommended_movies = [Movie.objects.get(id=i) for i in indices if i != movie.id][:10]
 
     context = {
         'movie': movie,
@@ -103,8 +103,8 @@ def movie_details(request, movie_id):
     item_sim = item_similarity(ratings)
     count = np.sum(item_sim == 1)
     np.place(item_sim, item_sim == 1, np.zeros(count))
-    indices = np.argsort(item_sim[int(movie_id) - 1, :])[:-6:-1] + 1
-    recommended_movies = [Movie.objects.get(id=i) for i in indices]
+    indices = np.argsort(item_sim[int(movie_id) - 1, :])[:-7:-1] + 1
+    recommended_movies = [Movie.objects.get(id=i) for i in indices if i != movie.id][:5]
 
     context = {
         'movie': movie,

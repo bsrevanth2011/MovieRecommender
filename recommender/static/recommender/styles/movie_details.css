@@ -2,6 +2,7 @@
     background-color: lightgray;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-left: 50px;
 }
 
 .movie_gist{
@@ -9,7 +10,7 @@
     padding: 10px;
     border-radius: 3px;
     height: 400px;
-    margin: 25px;
+    margin: 15px;
 }
 
 .caption{
@@ -52,6 +53,7 @@
     height: 400px;
     margin: 25px;
     padding-top: 20px;
+    margin-top: 15px;
 
 }
 
